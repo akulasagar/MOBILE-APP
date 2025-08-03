@@ -70,29 +70,6 @@ FIREBASE_CLIENT_EMAIL=your_firebase_client_email
 6. Add your environment variables in the Render dashboard
 7. Deploy!
 
-### Heroku
-
-1. Install Heroku CLI
-2. Create a new Heroku app:
-   ```bash
-   heroku create your-app-name
-   ```
-3. Add environment variables:
-   ```bash
-   heroku config:set MONGO_URI=your_mongodb_uri
-   heroku config:set JWT_SECRET=your_jwt_secret
-   ```
-4. Deploy:
-   ```bash
-   git push heroku main
-   ```
-
-### Railway
-
-1. Go to [Railway](https://railway.app)
-2. Connect your GitHub repository
-3. Add environment variables
-4. Deploy automatically
 
 ## Production Considerations
 
