@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const Plan = require('../models/Plan');
+const Plan = require('../models/plan');
 const User = require('../models/User'); // Import the User model
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require('axios');

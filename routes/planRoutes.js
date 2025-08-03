@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Plan = require('../models/Plan');
+const Plan = require('../models/plan');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const auth = require('../middleware/auth');
 const { normalizeTime, parseTime } = require('../utils/timeUtils');
