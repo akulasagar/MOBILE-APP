@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "my-ai-assistant-app",
+    "slug": "my-ai-assistant-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.yourname.aiassistant",
+      "googleServicesFile": "./google-services.json",
+      "softwareKeyboardLayoutMode": "resize",
+      "notification": {
+        "icon": "./assets/notification-icon.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ea7c29a2-80e3-448b-a0f4-34016fef90cb"
+      }
+    },
+    "owner": "sagar00",
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}
