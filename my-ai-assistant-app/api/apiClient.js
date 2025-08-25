@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
 // This is the same URL from your AuthScreen
-const API_URL = 'http://192.168.1.3:5001'; 
+const API_URL =  'http://10.0.2.2:5001'; 
 
 const apiClient = axios.create({
     baseURL: API_URL,

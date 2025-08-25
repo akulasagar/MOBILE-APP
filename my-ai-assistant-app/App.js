@@ -4,29 +4,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
 
-// Import the context from its new, separate file
 import { AuthContext } from './context/AuthContext'; 
 
-// Import all screens
 import HomeScreen from './screens/HomeScreen';
 import ChatScreen from './screens/ChatScreen';
 import PlansListScreen from './screens/PlansListScreen';
 import CreatePlanScreen from './screens/CreatePlanScreen';
 import PlanDetailScreen from './screens/PlanDetailScreen';
-import AuthScreen from './screens/authscreen';
+import AuthScreen from './screens/authscreen'; 
 
-// Import notification service
 import { registerForPushNotificationsAsync } from './services/pushNotifications';
 
 const Stack = createNativeStackNavigator();
 
-// AppStack and AuthStack remain unchanged
-
 function AppStack() {
-  useEffect(() => {
-    registerForPushNotificationsAsync();
-  }, []);
-
+  // --- [REMOVED] The problematic useEffect is no longer here ---
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
@@ -79,6 +71,17 @@ export default function App() {
 
     bootstrapAsync();
   }, []);
+  
+  // --- [NEW] SAFER useEffect FOR PUSH NOTIFICATIONS ---
+  useEffect(() => {
+    // This effect runs only when the userToken state changes.
+    if (userToken) {
+      // If a token exists (user is logged in), THEN we register for notifications.
+      // This guarantees the token is in SecureStore before this runs.
+      console.log("User logged in. Registering for push notifications...");
+      registerForPushNotificationsAsync();
+    }
+  }, [userToken]); // Dependency array makes this hook watch the userToken state
 
   const authContext = useMemo(() => ({
     signIn: async (token) => {

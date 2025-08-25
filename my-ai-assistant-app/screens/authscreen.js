@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
-const API_URL = 'http://192.168.1.3:5001'; 
+const API_URL =  'http://10.0.2.2:5001'; 
 
 const AuthScreen = () => {
     const { signIn } = useContext(AuthContext);

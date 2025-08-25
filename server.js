@@ -12,7 +12,7 @@ const planRoutes = require('./routes/planRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const userRoutes = require('./routes/users');
 const { startScheduler } = require('./services/taskScheduler');
-const errorHandler = require('./middleware/errorHandler'); // Import the new error handler
+const errorHandler = require('./middleware/errorHandler');
 
 // --- Part 4: App Initialization & Middleware ---
 const app = express();
@@ -27,29 +27,38 @@ app.use('/api/users', userRoutes);
 app.get('/', (req, res) => {
     res.send('AI Assistant Backend is Alive and Kicking!');
 });
+// Add this temporary route for testing
+app.get('/ping', (req, res) => {
+    console.log("✅ /ping endpoint was successfully reached!");
+    res.send('Pong!');
+});
 
 // --- Part 6: Central Error Handler Registration ---
 // THIS MUST BE THE LAST MIDDLEWARE
 app.use(errorHandler);
 
 // --- Part 7: Database Connection & Server Start ---
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001; // Ensure port is 5001
 const MONGO_URI = process.env.MONGO_URI;
 
 console.log("Attempting to connect to MongoDB...");
 mongoose.connect(MONGO_URI)
   .then(() => {
-    console.log("Success! Connected to MongoDB Atlas.");
+    console.log("✅ Success! Connected to MongoDB Atlas.");
 
-    app.listen(PORT, () => {
-      console.log(` Server is now listening on port ${PORT}`);
+    // --- THIS IS THE MODIFIED PART ---
+    // We explicitly tell the server to listen on '0.0.0.0'
+    // This allows connections from other devices on the same network.
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`🚀 Server is now listening on http://0.0.0.0:${PORT}`);
 
       // Start the scheduler after the server is successfully running.
       startScheduler();
     });
+    // ---------------------------------
   })
   .catch(err => {
-    console.error(" Connection Failed. Could not connect to MongoDB.");
+    console.error("❌ Connection Failed. Could not connect to MongoDB.");
     console.error(err);
     process.exit(1);
   });
